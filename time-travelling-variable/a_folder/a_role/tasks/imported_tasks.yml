@@ -1,0 +1,4 @@
+---
+- name: "Finally, print the current value of our time-travelling variable"
+  ansible.builtin.debug:
+    msg: "{{ time_traveller_var }}"

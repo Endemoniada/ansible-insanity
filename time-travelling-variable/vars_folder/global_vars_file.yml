@@ -1,0 +1,11 @@
+star_wars_cast:
+  - "Luke Skywalker"
+  - "Leia Organa"
+  - "Han Solo"
+
+# We're declaring a variable, using a value from another variable
+# that hasn't yet been declared!
+#
+# The 'templated_var' variable will be declared later in our role, as we loop
+# over the star_wars_cast list, from within the templated vars files
+final_var: "{{ templated_var }}"

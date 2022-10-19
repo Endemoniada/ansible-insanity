@@ -1,0 +1,15 @@
+---
+- name: "Declare variables from our newly templated vars files"
+  ansible.builtin.include_vars:
+    file: "templated_vars/{{ character }}.yml"
+
+- name: "Declare our time-travelling variable, within the loop"
+  ansible.builtin.set_fact:
+    # Here we're declaring a new variable, using the value of the original
+    # *global* variable, that in turn was declared using the value of
+    # yet another variable that *had not yet been declared*
+    time_traveller_var: "{{ intermediate_var }}"
+
+- name: "Statically import tasks to print the time-travelling variable"
+  ansible.builtin.import_tasks:
+    file: "imported_tasks.yml"

@@ -1,0 +1,7 @@
+# Declare an additional, intermediate variable using the value
+# of the original, global variable
+#
+# However, note that when 'final_var' was declared originally,
+# 'character' had not yet been created or set to any value,
+# nor had 'looped_var' been templated *or* read into active memory
+intermediate_var: "{{ final_var }}"
