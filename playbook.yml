@@ -1,0 +1,13 @@
+---
+- name: "Declaring a variable with the value of another variable that hasn't yet been declared"
+  hosts: localhost
+  gather_facts: false
+
+  # Declare our starting global variables
+  # Note that this happens just one time, at the very starting
+  # of the playbook
+  vars_files:
+    - vars_folder/global_vars_file.yml
+
+  roles:
+    - role: "a_folder/a_role"

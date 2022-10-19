@@ -1,0 +1,30 @@
+---
+- name: "Dynamically include role vars"
+  ansible.builtin.include_vars:
+    dir: "vars"
+
+# This task will make Ansible crash, because the 'final_var' variable
+# is assigned a value of another variable that hasn't yet been declared
+# - name: "Print the 'final_var' global variable"
+#   ansible.builtin.debug:
+#     msg: "{{ final_var }}"
+
+- name: "Create temporary directory for templateted vars files"
+  ansible.builtin.file:
+    path: templated_vars
+    state: directory
+
+- name: "Render templates to files"
+  ansible.builtin.template:
+    src: "vars.yml.j2"
+    dest: "templated_vars/{{ character }}.yml"
+  with_items: "{{ star_wars_cast }}"
+  loop_control:
+    loop_var: "character"
+
+- name: "Dynamically include tasks while looping"
+  ansible.builtin.include_tasks:
+    file: looped_tasks.yml
+  with_items: "{{ star_wars_cast }}"
+  loop_control:
+    loop_var: "character"
